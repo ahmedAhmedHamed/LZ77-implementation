@@ -63,9 +63,20 @@ class lz77:
 
         return returned_compressed_string
 
-
-    def decompress(self, compressed_string: [[int, int, str]]) -> str:
-        return 'a'
+    @staticmethod
+    def decompress(string_to_be_decompressed: [[int, int, str]]) -> str:
+        ret = ''
+        for tag in string_to_be_decompressed:
+            position, length, symbol = tag
+            search_window = ret
+            if length != 0:
+                while length:
+                    index = len(search_window) - position
+                    ret += search_window[index]
+                    length -= 1
+                    position -= 1
+            ret += symbol
+        return ret
 
 
 if __name__ == '__main__':
@@ -84,3 +95,4 @@ if __name__ == '__main__':
     print('size of compressed_string: ', sys.getsizeof(compressed_string))
     print('decompressed_string: ', decompressed_string)
     print('size of decompressed_string: ', sys.getsizeof(decompressed_string))
+    assert input_string == decompressed_string
