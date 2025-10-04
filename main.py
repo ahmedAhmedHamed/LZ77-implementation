@@ -19,7 +19,7 @@ class lz77:
             if lookahead_window[0] == search_window[i]:
                 j = 1
                 while (j < len(lookahead_window)
-                       and self.search_window_size > len(search_window) > i + j
+                       and self.search_window_size >= len(search_window) > i + j
                        and lookahead_window[j] == search_window[i + j]):
                     j += 1
                 if longest_match_length < j:
