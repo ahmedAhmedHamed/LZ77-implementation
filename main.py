@@ -73,7 +73,7 @@ if __name__ == '__main__':
     NUM_POSITION_BITS = 3
     LOOKAHEAD_WINDOW_SIZE = 2 ** NUM_LOCATION_BITS
     SEARCH_WINDOW_SIZE = 2 ** NUM_POSITION_BITS
-    lz = lz77(LOOKAHEAD_WINDOW_SIZE, SEARCH_WINDOW_SIZE)
+    lz = lz77(11, 11)
 
     input_string = 'ABAABABAABBBBBBBBBBBBA' # lecture 1 example; slide 19.
     compressed_string = lz.compress(input_string)
