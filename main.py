@@ -12,7 +12,7 @@ class lz77:
         """returns the longest match in search window starting from lookahead_window,
          currently doesn't handle repeating at the end"""
         longest_match_length = 0
-        longest_match_index = 0
+        longest_match_index = -1
         if len(lookahead_window) == 0:
             return 0, 0
         for i in range(len(search_window)):
@@ -25,6 +25,10 @@ class lz77:
                 if longest_match_length < j:
                     longest_match_length = j
                     longest_match_index = i
+        if longest_match_index != -1:
+            longest_match_index = len(search_window) - longest_match_index
+        else:
+            longest_match_index = 0
         return longest_match_index, longest_match_length
 
     def construct_lookahead_window(self, string_to_be_compressed: str, index: int):
@@ -55,7 +59,6 @@ class lz77:
                 returned_compressed_string.append([position, length, '\0'])
             if len(search_window) > self.search_window_size:
                 search_window.pop(0)
-
             i += max(length + 1, 1)
 
         return returned_compressed_string
